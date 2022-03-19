@@ -4,28 +4,43 @@
 
 using namespace std;
 
+
+
+// Implementacion de los Constructores
 Libro::Libro()
 {
-    this->nombre = "Tutorial Amazon Kindle";
+    this->titulo = "Tutorial Amazon Kindle";
     this->autor = "Amazon Kindle";
-    this->numeroPaginas = 200;
-    this->año = 2021;
+    this->numeroPaginas = 55;
+    this->año = 2020;
 }
 
-Libro::Libro(string nombre, string autor, int numeroPaginas,
-             int año)
+Libro::Libro(string titulo, string autor, int numeroPaginas,
+    int año)
 {
-    this->nombre = nombre;
+    this->titulo = titulo;
     this->autor = autor;
-    this->numeroPaginas = numeroPaginas;
+    this->numeroPaginas= numeroPaginas;
     this->año = año;
 }
 
 
 void Libro::imprimirInfoLibro()
 {
-    cout << "Nombre: " << this->nombre << endl;
+    cout << "Titulo del libro: " << this->titulo << endl;
     cout << "Autor: " << this->autor << endl;
-    cout << "Numero de Paginas: " << this->numeroPaginas << endl;
-    cout << "Año: " << this->año << endl;
+    cout << "Numero de paginas" << this->numeroPaginas <<endl;
+    cout << "Anio: " << this->año << endl;
 }
+
+
+
+
+
+
+
+
+
+
+
+
