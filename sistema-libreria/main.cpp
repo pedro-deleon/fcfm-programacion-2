@@ -1,80 +1,93 @@
 #include <iostream>
 #include <string>
 #include "Libro.h"
+#include <vector>
 
+// arreglo global del main de tipo vector.
 vector<Libro> libros;
-bool agregarLibro(Libro libro);
-bool eliminarLibro(string titulo);
-void imprimirLibros();
+
+void agregarLibro(Libro libro);
+void eliminarLibro(string titulo);
+void imprimirLibrosEnConsola();
 
 using namespace std;
 
 int main()
 {
-    Libro libro1;
-    Libro libro2("El Principito", "Antoine deSaintExcupery", 180, 1850);
-    Libro libro3("Quimica", "Profe Antolin", 880, 2010);
+    // Inicialización de Objeto tipo Libro
 
-    agregarLibro(libro1);
-    agregarLibro(libro2);
-    agregarLibro(libro3);
+    try
+    {
+        Libro libro("El Principito", "Antoine deSaintExcupery", -2, 1850);
+        cout << "Informacion guardada correctamente!" << endl;
+    }
+    catch (const invalid_argument e)
+    {
+        cout << "Exception: " << e.what() << endl;
+        cout << "Revisa que la informacion esta correcta" << endl;
+    }
 
-    imprimirLibros();
-    cout << "##################################" << endl;
-    cout << "##################################" << endl;
-    cout << "##################################" << endl;
-    cout << "Antes de llamar función eliminarLibro" << endl;
-    cout << "##################################" << endl;
-    cout << "##################################" << endl;
-    cout << "##################################" << endl;
+    Libro libro;
+    while (true)
+    {
+        try
+        {
 
-    eliminarLibro("El Principito");
-    imprimirLibros();
+            string autor;
+            string titulo;
+            int año;
+            int numeroPaginas;
+
+            cout << "Ingrese el titulo del libro" << endl;
+            getline(cin, titulo);
+            libro.guardarTitulo(titulo);
+
+            cout << "Cuantas paginas tiene el libro" << endl;
+            cin >> numeroPaginas;
+            cin.ignore(1, '\n');
+            libro.guardarNumeroPaginas(numeroPaginas);
+
+            break;
+        }
+        catch (const invalid_argument e)
+        {
+            cout << "Exception: " << e.what() << endl;
+            cout << "Ingrese nuevamente la informacion" << endl;
+            cout << "============================================" << endl;
+        }
+    }
+
+    libro.imprimirInfoLibro();
 
     return 0;
 }
 
-/**
- * Agregar un libro a vector global libros
- *
- * @return true libro agregado correctamente
- * @return false error al agregar libro
- */
-bool agregarLibro(Libro libro)
+void agregarLibro(Libro libro)
 {
     libros.push_back(libro);
-    return true;
 }
 
-/**
- * Elimina libro del vector global de libros
- *
- * @return true libro eliminado con éxito
- * @return false el libro no pudo ser eliminados
- */
-bool eliminarLibro(string titulo)
+void eliminarLibro(string titulo)
 {
-    // Buscar la posición del nombre del libro.
-    bool seEliminoLibro = false;
-
+    // Iterando en nuestro vector de libros
     for (int i = 0; i < libros.size(); i++)
     {
+        // Comprobando en ese vector que tenga nombre del titulo igual al
+        // del parámetro
         if (titulo == libros[i].titulo)
         {
             libros.erase(libros.begin() + i);
-            seEliminoLibro = true;
             break;
         }
     }
-    return seEliminoLibro;
 }
 
-void imprimirLibros()
+void imprimirLibrosEnConsola()
 {
+    // Imprimir en consola todos los libros del vector
     for (int i = 0; i < libros.size(); i++)
     {
-        cout << "Libro # " << i + 1 << endl;
         libros[i].imprimirInfoLibro();
-        cout << "====================================" << endl;
+        cout << "_________________________________" << endl;
     }
 }

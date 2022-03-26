@@ -1,20 +1,14 @@
 #include <string>
-#include <vector>
-
-
-
 using namespace std;
-
-
 
 class Libro
 {
 
 public:
-    // Constructores
+// Constructores
     Libro();
     Libro(string titulo, string autor,
-          int numeroPaginas, int año);
+         int numeroPaginas, int año);
 
     // propiedades
     string titulo;
@@ -24,5 +18,8 @@ public:
 
     // funciones
     void imprimirInfoLibro();
+    void guardarNumeroPaginas(int numeroPaginas);
+    void guardarTitulo(string titutlo);
 
+    
 };
